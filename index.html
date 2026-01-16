@@ -198,8 +198,13 @@
             <p class="modal-subtitle">Tell us about your project and we'll get back to you shortly.</p>
 
             <form id="enquiryForm"
-                action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeLc5qrH8AaCRdYPzPjqxrw37J7kOKK9FzhwCI7ueibxxq0Aw/formResponse"
+                action="https://docs.google.com/forms/d/e/1FAIpQLSeLc5qrH8AaCRdYPzPjqxrw37J7kOKK9FzhwCI7ueibxxq0Aw/formResponse"
                 method="POST" target="hidden_iframe" onsubmit="handleFormSubmit()">
+                <!-- Hidden fields for Google Forms auth/security -->
+                <input type="hidden" name="fvv" value="1">
+                <input type="hidden" name="fbzx" value="8649049773041506290">
+                <input type="hidden" name="pageHistory" value="0">
+
                 <div class="form-group">
                     <label for="name">Name *</label>
                     <input type="text" id="name" name="entry.1489372664" required placeholder="Your Name">
