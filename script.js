@@ -49,7 +49,7 @@ const dots = document.querySelectorAll('.slider-dot');
 function showSlide(n) {
     currentSlide = (n + slides.length) % slides.length;
     slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-    
+
     dots.forEach((dot, index) => {
         dot.classList.toggle('active', index === currentSlide);
     });
@@ -81,7 +81,7 @@ const header = document.querySelector('header');
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
+
     if (currentScroll > 50) {
         header.style.padding = '0.5rem 0';
         header.style.background = 'rgba(255, 255, 255, 0.95)';
@@ -89,7 +89,7 @@ window.addEventListener('scroll', () => {
         header.style.padding = '0';
         header.style.background = 'rgba(255, 255, 255, 0.85)';
     }
-    
+
     lastScroll = currentScroll;
 });
 
@@ -120,9 +120,60 @@ document.querySelectorAll('.service-card, .contact-card, .section-title').forEac
 document.addEventListener("mousemove", (e) => {
     const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
     const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
-    
+
     const heroContent = document.querySelector('.hero-content');
-    if(heroContent) {
+    if (heroContent) {
         heroContent.style.transform = `translate(${moveX}px, ${moveY}px)`;
     }
 });
+
+// Modal Logic
+const modal = document.getElementById("enquiryModal");
+const form = document.getElementById("enquiryForm");
+const successMessage = document.getElementById("successMessage");
+const iframe = document.getElementById("hidden_iframe");
+let submitted = false;
+
+function openModal() {
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden"; // Prevent background scrolling
+}
+
+function closeModal() {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+
+    // Reset form after a slight delay if it was submitted
+    if (submitted) {
+        setTimeout(() => {
+            form.style.display = "block";
+            successMessage.style.display = "none";
+            form.reset();
+            submitted = false;
+        }, 500);
+    }
+}
+
+// Close modal when clicking outside
+window.onclick = function (event) {
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+// Handle Form Submit
+function handleFormSubmit() {
+    submitted = true;
+    // Hide form and show loading state if desired, or just wait for iframe load
+    form.style.display = "none";
+    // For visualization let's show success immediately via iframe onload, 
+    // but we can also show a "Submitting..." text here if needed.
+}
+
+// Show success message
+function showSuccess() {
+    if (submitted) {
+        form.style.display = "none";
+        successMessage.style.display = "block";
+    }
+}
